@@ -1,5 +1,5 @@
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
-import { lightTheme, darkTheme, type Theme} from '@styles/theme';
+import { blueTheme, orangeTheme, type Theme} from '@styles/theme';
 import { type ReactNode, useState, createContext, useContext } from 'react';
 
 // Context to toggle themes
@@ -22,7 +22,7 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const [isDark, setIsDark] = useState(false);
 
   const toggleTheme = () => setIsDark(!isDark);
-  const theme = isDark ? darkTheme : lightTheme;
+  const theme = isDark ? orangeTheme : blueTheme;
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>

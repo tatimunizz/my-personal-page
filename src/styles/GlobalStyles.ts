@@ -9,12 +9,12 @@ const GlobalStyles = createGlobalStyle`
 
   body {
     font-family: ${props => props.theme.typography.fontFamily};
-    background-color: ${props => props.theme.colors.background};
-    color: ${props => props.theme.colors.text};
+    background-color: ${props => props.theme.colors.light};
+    color: ${props => props.theme.colors.dark};
   }
 
   a {
-    color: ${props => props.theme.colors.primary};
+    color: ${props => props.theme.colors.light};
     text-decoration: none;
   }
 `;
