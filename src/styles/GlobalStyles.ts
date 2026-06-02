@@ -12,6 +12,7 @@ const GlobalStyles = createGlobalStyle`
     font-family: 'Ubuntu Mono', sans-serif;
     background-color: ${props => props.theme.colors.light};
     color: ${props => props.theme.colors.dark};
+    
   }
 
   a {
@@ -25,6 +26,12 @@ const GlobalStyles = createGlobalStyle`
     font-size: 100%;
     font-weight: normal;
     line-height: 1.2;
+  }
+
+  main {
+    padding: 32px 72px;
+    display: flex;
+    justify-content: space-between;
   }
 `;
 
