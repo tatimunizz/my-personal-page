@@ -10,7 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fontsource/ubuntu-mono": "^5.2.8",
     "@types/styled-components": "^5.1.36",
+    "pixelarticons": "^2.1.2",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "react-router-dom": "^7.16.0",

@@ -1,6 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
+
   * {
     margin: 0;
     padding: 0;
@@ -8,7 +9,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    font-family: ${props => props.theme.typography.fontFamily};
+    font-family: 'Ubuntu Mono', sans-serif;
     background-color: ${props => props.theme.colors.light};
     color: ${props => props.theme.colors.dark};
   }
@@ -16,6 +17,14 @@ const GlobalStyles = createGlobalStyle`
   a {
     color: ${props => props.theme.colors.light};
     text-decoration: none;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+    font-weight: normal;
+    line-height: 1.2;
   }
 `;
 

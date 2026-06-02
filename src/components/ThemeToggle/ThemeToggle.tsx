@@ -15,7 +15,7 @@ export default function ThemeToggle() {
 
   return (
     <ToggleButton onClick={toggleTheme}>
-      Switch to {theme.colors.secondaryLight === '#ffffff' ? 'Dark' : 'Light'} Mode
+      Switch Color Mode
     </ToggleButton>
   );
 }

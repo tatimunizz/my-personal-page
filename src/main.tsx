@@ -4,6 +4,7 @@ import { RouterProvider } from 'react-router-dom';
 import { router } from './routes';
 import GlobalStyles from './styles/GlobalStyles';
 import { ThemeProvider } from '@/providers/ThemeProvider';
+import '@fontsource/ubuntu-mono';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
