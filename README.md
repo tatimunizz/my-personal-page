@@ -13,7 +13,7 @@ Styling | Styled Components
 
 ## Design
 I am using [Penpot](https://penpot.app/), an open-source design  platform. I am no designer by any means, but I enjoy messing up with it and learning a bit in the process.
-For this first version I am inspired by Windows operating system to create my page. Besides the main content of the page, I am also creating little widgets to display fun things such as a mini paint canvas, and a palette picker, which the visitor can change the palette to its liking.
+For this first version I am inspired by Windows operating system to create my page. Besides the main content of the page, I am also creating little widgets to display fun things such as a mini paint canvas, and a palette picker, which allows  visitors to change the palette to their liking.
 
 For the icons I am using [Pixelarticons lib](https://pixelarticons.com/).
 
