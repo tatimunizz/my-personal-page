@@ -2,6 +2,12 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
 
+  html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
   * {
     margin: 0;
     padding: 0;
@@ -34,11 +40,6 @@ const GlobalStyles = createGlobalStyle`
     line-height: 1.2;
   }
 
-  main {
-    padding: 32px 72px;
-    display: flex;
-    justify-content: space-between;
-  }
 `;
 
 export default GlobalStyles;
