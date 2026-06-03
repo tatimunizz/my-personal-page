@@ -1,4 +1,5 @@
 
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const StyledHeader = styled.header`
@@ -9,8 +10,9 @@ export const StyledHeader = styled.header`
   padding: 32px 72px;
 `
 
-export const HeaderTitle = styled.div`
+export const HeaderTitle = styled(Link)`
   display: flex;
+  text-decoration: none;
   color: ${props => props.theme.colors.light};
   gap: 10px;
   flex-direction: column;

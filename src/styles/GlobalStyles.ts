@@ -18,6 +18,11 @@ const GlobalStyles = createGlobalStyle`
   a {
     color: ${props => props.theme.colors.light};
     text-decoration: none;
+    
+  }
+
+  a:Hover {
+    color: ${props => props.theme.colors.medium};
   }
 
   h1, h2, h3, h4, h5, h6 {

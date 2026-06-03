@@ -2,20 +2,21 @@
 import { LargeIcon } from '@components/LargeIcon/LargeIcon';
 import {StyledHeader, HeaderTitle, NavBar} from './Header.styles';
 import { Folder, Image, ListBox, User } from 'pixelarticons/react';
+import { Link } from 'react-router-dom';
 
 export function Header() {
   return (
     <StyledHeader>
-      <HeaderTitle>
+      <HeaderTitle to="/">
         <h1>tatiana muniz</h1>
         <p>personal computer</p>
       </HeaderTitle>
       <NavBar>
         <ul>
-          <li><a href="#">
+          <li><Link to ="/about-me">
             <LargeIcon><User/></LargeIcon>
             about me
-          </a></li>
+          </Link></li>
           <li><a href="#">
             <LargeIcon><Image/></LargeIcon>
             images
