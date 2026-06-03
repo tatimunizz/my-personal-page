@@ -2,6 +2,8 @@
 
 I miss when the internet was a fun place to be. I miss the blogs where people posted what was on their minds, the spaces for sharing photos and music, and genuinely connecting with people. Thinking about that, I decided to create a space for me to share my hobbies, my tastes, and my craziness. And while I do that, I get to practice a bit more full-stack development.
 
+You can check the page [here](https://my-personal-page.tati-muniz0.workers.dev), deployed with [Cloudflare](https://www.cloudflare.com). The page cannot currently be accessed in China without a VPN. I am working on that.
+
 ## Tech stack
 |  |  |
 |--|--|
