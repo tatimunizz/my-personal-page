@@ -1,12 +1,13 @@
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
-import { blueTheme, orangeTheme, type Theme} from '@styles/theme';
-import { type ReactNode, useState, createContext, useContext } from 'react';
+import { themes, type Theme, type ThemeName} from '@styles/theme';
+import { type ReactNode, useState, createContext, useContext, useCallback } from 'react';
 
-// Context to toggle themes
 type ThemeContextType = {
   theme: Theme;
-  toggleTheme: () => void;
-};
+  themeName: ThemeName;
+  nextTheme: () => void;
+  prevTheme: () => void;
+}
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
@@ -19,13 +20,26 @@ export const useTheme = () => {
 };
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  const [isDark, setIsDark] = useState(false);
+  const [themeName, setThemeName] = useState<ThemeName>('orange');
 
-  const toggleTheme = () => setIsDark(!isDark);
-  const theme = isDark ? orangeTheme : blueTheme;
+  const nextTheme = useCallback(() => {
+    const themeList = Object.keys(themes) as ThemeName[];
+    const currentIndex = themeList.indexOf(themeName);
+    const nextIndex = (currentIndex + 1) % themeList.length;
+    setThemeName(themeList[nextIndex]);
+  }, [themeName]);
+
+  const prevTheme = useCallback(() => {
+    const themeList = Object.keys(themes) as ThemeName[];
+    const currentIndex = themeList.indexOf(themeName);
+    const prevIndex = (currentIndex - 1 + themeList.length) % themeList.length;
+    setThemeName(themeList[prevIndex]);
+  }, [themeName]);
+
+  const theme = themes[themeName];
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme, themeName, nextTheme, prevTheme }}>
       <StyledThemeProvider theme={theme}>{children}</StyledThemeProvider>
     </ThemeContext.Provider>
   );

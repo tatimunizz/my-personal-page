@@ -1,6 +1,6 @@
 import { Widget } from "@components/Widget/Widget";
 import { StyledSideBar } from "./SideBar.styles";
-import { Window } from "@components/Window/Window";
+import { PalettePicker } from "@components/PalettePicker/PalettePicker";
 
 export function SideBar() {
   return (
@@ -10,12 +10,7 @@ export function SideBar() {
           weather
         </div>
       </Widget>
-      <Window title="palette.exe">
-        <div>children</div>
-      </Window>
-      <Window title="paint.exe">
-        <div>paint</div>
-      </Window>
+      <PalettePicker/>
     </StyledSideBar>
   );
 }

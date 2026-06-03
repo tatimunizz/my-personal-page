@@ -69,3 +69,10 @@ export const blueTheme: Theme = {
     },
   },
 };
+
+export const themes = {
+  orange: orangeTheme,
+  blue: blueTheme,
+} as const;
+
+export type ThemeName = keyof typeof themes;

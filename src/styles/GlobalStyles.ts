@@ -10,6 +10,7 @@ const GlobalStyles = createGlobalStyle`
 
   body {
     font-family: 'Ubuntu Mono', sans-serif;
+    font-size: ${prop => prop.theme.typography.fontSize.small};
     background-color: ${props => props.theme.colors.light};
     color: ${props => props.theme.colors.dark};
     

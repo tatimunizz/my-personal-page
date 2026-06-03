@@ -13,5 +13,5 @@ export const TitleBar = styled.div`
 `
 
 export const ContentBox = styled.div`
-  padding: 10px;
+  padding: 20px;
 `
