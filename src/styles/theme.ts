@@ -93,7 +93,7 @@ export const blueTheme: Theme = {
     tablet: '744px',
   },
   global: {
-    xpadding: '24px 32px',
+    xpadding: '24px 24px',
     padding: '32px 72px',
   }
 };

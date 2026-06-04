@@ -14,6 +14,8 @@ export const Canvas = styled.canvas`
   image-rendering: pixelated;
   border: 1px solid ${props => props.theme.colors.light};
   cursor: crosshair;
+
+  touch-action: none;
 `
 
 export const CanvasTools = styled.div`
