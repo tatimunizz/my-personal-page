@@ -8,8 +8,13 @@ export const LayoutContainer = styled.div`
 
 export const MainContent = styled.main`
   flex: 1; 
-  padding: 32px 72px;
+  padding: ${props => props.theme.global.padding};
   display: flex;
   justify-content: space-between;
   gap: 24px;
+
+  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
+    padding: ${props => props.theme.global.xpadding};
+    flex-direction: column;
+  }
 `;

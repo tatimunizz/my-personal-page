@@ -7,7 +7,11 @@ export const StyledFooter = styled.footer`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 32px 72px;
+  padding: ${props => props.theme.global.padding};
+
+  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
+    padding: ${props => props.theme.global.xpadding};
+  }
 `
 
 export const FooterNote = styled.div`
@@ -22,8 +26,22 @@ export const FooterNote = styled.div`
   p {
     font-size: ${props => props.theme.typography.fontSize.small};
   }
+
+  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
+    span {
+      font-size: ${props => props.theme.typography.fontSize.small};
+    }
+
+    p {
+      font-size: ${props => props.theme.typography.fontSize.xsmall};
+    }
+  }
 `
 
 export const FooterCredit = styled.div`
   text-align: right;
+
+  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
+    font-size: ${prop => prop.theme.typography.fontSize.xxsmall};
+  }
 `

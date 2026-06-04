@@ -20,12 +20,14 @@ const GlobalStyles = createGlobalStyle`
     background-color: ${props => props.theme.colors.light};
     color: ${props => props.theme.colors.dark};
     
+    @media (max-width: ${props => props.theme.breakpoints.mobile}) {
+      font-size: ${prop => prop.theme.typography.fontSize.xsmall};
+    }
   }
 
   a {
     color: ${props => props.theme.colors.light};
     text-decoration: none;
-    
   }
 
   a:Hover {

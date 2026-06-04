@@ -15,14 +15,23 @@ export interface Theme {
   typography: {
     fontFamily: string;
     fontSize: {
+      xxsmall: string;
+      xsmall: string;
       small: string;
       medium: string;
       large: string;
     };
   };
+  breakpoints: {
+    mobile: string;
+    tablet: string;
+  };
+  global: {
+    xpadding: string;
+    padding: string;
+  };
 }
 
-// orangeTheme
 export const orangeTheme: Theme = {
   colors: {
     dark: '#003049',
@@ -39,14 +48,23 @@ export const orangeTheme: Theme = {
   typography: {
     fontFamily: 'Ubuntu Mono, sans-serif',
     fontSize: {
+      xxsmall: '14px',
+      xsmall: '16px',
       small: '18px',
       medium: '24px',
       large: '36px',
     },
   },
+  breakpoints: {
+    mobile: '744px',
+    tablet: '744px',
+  },
+  global: {
+    xpadding: '24px 24px',
+    padding: '32px 72px',
+  }
 };
 
-// Blue theme
 export const blueTheme: Theme = {
   colors: {
     dark: '#184e77',
@@ -63,11 +81,21 @@ export const blueTheme: Theme = {
   typography: {
     fontFamily: 'Ubuntu Mono, sans-serif',
     fontSize: {
+      xxsmall: '14px',
+      xsmall: '16px',
       small: '18px',
       medium: '24px',
       large: '36px',
     },
   },
+  breakpoints: {
+    mobile: '744px',
+    tablet: '744px',
+  },
+  global: {
+    xpadding: '24px 32px',
+    padding: '32px 72px',
+  }
 };
 
 export const themes = {
