@@ -1,10 +1,10 @@
-import { Widget } from "@components/Widget/Widget";
 import { MobileButton, SideBarContent, StyledSideBar, Toggle, MobileAccordion } from "./SideBar.styles";
 import { PalettePicker } from "@components/PalettePicker/PalettePicker";
 import { PaintCanvas } from "@components/PaintCanvas/PaintCanvas";
 import { LargeIcon } from "@components/LargeIcon/LargeIcon";
 import { ChevronDown } from "pixelarticons/react";
 import { useState } from "react";
+import { WeatherWidget } from "@components/WeatherWidget/WeatherWidget";
 
 export function SideBar() {
 
@@ -22,11 +22,7 @@ export function SideBar() {
         </Toggle>
       </MobileButton>
       <SideBarContent $isOpen={isOpen}>
-        <Widget>
-        <div>
-          weather
-        </div>
-      </Widget>
+        <WeatherWidget/>
       <PalettePicker/>
       <PaintCanvas/>
       </SideBarContent>
