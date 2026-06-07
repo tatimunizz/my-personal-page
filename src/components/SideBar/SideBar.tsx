@@ -5,6 +5,7 @@ import { LargeIcon } from "@components/LargeIcon/LargeIcon";
 import { ChevronDown } from "pixelarticons/react";
 import { useState } from "react";
 import { WeatherWidget } from "@components/WeatherWidget/WeatherWidget";
+import { MusicPlayer } from "@components/MusicPlayer/MusicPlayer";
 
 export function SideBar() {
 
@@ -25,6 +26,7 @@ export function SideBar() {
         <WeatherWidget/>
       <PalettePicker/>
       <PaintCanvas/>
+      <MusicPlayer/>
       </SideBarContent>
       </MobileAccordion>
     </StyledSideBar>

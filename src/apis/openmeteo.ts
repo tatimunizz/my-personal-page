@@ -28,8 +28,6 @@ const weatherData = {
 		weather_code: current.variables(2)!.value(),
 	};
 
-	console.log(lat, lon);
-
 	return {
   temperature: weatherData.temperature_2m,
   humidity: weatherData.relative_humidity_2m,
