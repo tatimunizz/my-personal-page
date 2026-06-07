@@ -1,8 +1,6 @@
 import { weatherAPI } from "@apis/openmeteo";
 import { getLocationByIp } from "@apis/iplocation";
-import { reverseGeocodeNominatim } from "quick-geocode";
 import { useState, useEffect } from "react";
-import useGeoLocation from "@bigdatacloudapi/react-reverse-geocode-client";
 
 interface WeatherData {
   temperature: number;
@@ -12,6 +10,17 @@ interface WeatherData {
   country: string;
   loading: boolean;
   error: string | null;
+}
+
+async function reverseGeocode(lat: number, lon: number) {
+  const response = await fetch(
+    `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`
+  );
+  const data = await response.json();
+  return {
+    city: data.city || data.locality || "Unknown",
+    country: data.countryName || "Unknown",
+  };
 }
 
 const getBrowserLocation = (): Promise<{lat: number; long: number}> => {
@@ -49,12 +58,12 @@ export function useWeather(): WeatherData {
       setWeather(prev => ({ ...prev, loading: true, error: null }));
       
       let location: { lat: number; lon: number; city?: string; country?: string } | null = null;
-        
+  
       const ipLocation = await getLocationByIp();
         if (ipLocation && ipLocation.loc) {
-        const [lat, lon] = ipLocation.loc.split(',').map(Number);
+          const [lat, lon] = ipLocation.loc.split(',').map(Number);
 
-        if (!isNaN(lat) && !isNaN(lon)) {
+          if (!isNaN(lat) && !isNaN(lon)) {
           location = {
             lat,
             lon,
@@ -67,11 +76,13 @@ export function useWeather(): WeatherData {
       if (!location) {
         try {
           const browserLoc = await getBrowserLocation();
+          const { city, country} = await reverseGeocode(browserLoc.lat, browserLoc.long);
+
           location = {
             lat: browserLoc.lat,
             lon: browserLoc.long,
-            city: undefined,
-            country: undefined,
+            city,
+            country,
           };
         } catch(e) {
           console.log("Browser geolocation error: ", e);
@@ -106,6 +117,6 @@ export function useWeather(): WeatherData {
 
     fetchWeather();
   }, []);
-  
+
   return weather;
 }

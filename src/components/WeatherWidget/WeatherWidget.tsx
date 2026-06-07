@@ -6,7 +6,7 @@ import { useTheme } from "@/providers/ThemeProvider";
 import { DisplayText, StyledWeatherWidget, Temperature, WeatherIcon } from "./WeatherWidget.styles";
 
 export function WeatherWidget() {
-  const { temperature, humidity, weatherCode, city, country, loading, error } = useWeather();
+  const { temperature, weatherCode, city, country, loading, error } = useWeather();
   
   const {theme} = useTheme();
   const getWeatherIcon = (size: number) => {
