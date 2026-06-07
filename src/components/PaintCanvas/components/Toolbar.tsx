@@ -12,7 +12,7 @@ interface ToolbarProps {
 export function Toolbar({ isBucketMode, onToggleBucket, onSave, onClear }: ToolbarProps) {
   return (
     <div style={{ display: 'flex', gap: '8px' }}>
-      <IconButton onClick={onToggleBucket} active={isBucketMode}>
+      <IconButton onClick={onToggleBucket} $active={isBucketMode}>
         <SprayImage />
       </IconButton>
       <IconButton onClick={onClear}>

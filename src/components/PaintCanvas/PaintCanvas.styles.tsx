@@ -24,7 +24,7 @@ export const CanvasTools = styled.div`
   gap: 10px;
 `
 
-export const IconButton = styled.button<{active?: boolean}>`
+export const IconButton = styled.button<{ $active?: boolean}>`
   background: none;
   border: none;
   cursor: pointer;
@@ -32,8 +32,8 @@ export const IconButton = styled.button<{active?: boolean}>`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${props => props.active ? props.theme.colors.medium : props.theme.colors.dark};
-  opacity: ${props => props.active ? 1 : 0.7};
+  color: ${props => props.$active ? props.theme.colors.medium : props.theme.colors.dark};
+  opacity: ${props => props.$active ? 1 : 0.7};
   transition: all 0.2s;
   &:hover {
     opacity: 1;
