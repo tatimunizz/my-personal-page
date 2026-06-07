@@ -1,7 +1,7 @@
 import { Widget } from "@components/Widget/Widget";
 import { useWeather } from "./hooks/useWeather";
 import { PxlKitIcon } from "@pxlkit/core";
-import { Cloud, CloudSun, Droplet, Rain, Snow, Sun, Thunder } from "@pxlkit/weather";
+import { Cloud, CloudSun, Rain, Snow, Sun, Thunder } from "@pxlkit/weather";
 import { useTheme } from "@/providers/ThemeProvider";
 import { DisplayText, StyledWeatherWidget, Temperature, WeatherIcon } from "./WeatherWidget.styles";
 
@@ -32,9 +32,6 @@ export function WeatherWidget() {
           <Temperature>{Math.round(temperature)}°C</Temperature>
           {city}, {country}
         </DisplayText>
-        <PxlKitIcon icon={Droplet} size={48} appearance="solid" color={theme.colors.dark} />
-        <Temperature>{Math.round(humidity)}%</Temperature>
-
       </StyledWeatherWidget>
   </Widget>
   );
