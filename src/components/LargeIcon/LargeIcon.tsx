@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
-export const LargeIcon = styled.div`
-  width: 48px;
-  height: 48px;
+
+export const LargeIcon = styled.div<{size?: number}>`
+  width: ${props => props.size ? String(props.size) : '48' }px;
+  height: ${props => props.size ? String(props.size) : '48' }px;
 
   svg {
     width: 100%;
@@ -10,7 +11,8 @@ export const LargeIcon = styled.div`
   }
 
   @media (max-width: ${props => props.theme.breakpoints.mobile}) {
-    width: 32px;
-  height: 32px;
+  width: ${props => props.size ? String(props.size) : '32' }px;
+  height: ${props => props.size ? String(props.size) : '32' }px;
+
   }
 `

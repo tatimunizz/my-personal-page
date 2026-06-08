@@ -1,25 +1,51 @@
 import { Window } from "@components/Window/Window";
 import { useAudiusSdk } from "./hooks/useAudiusSdk";
 import { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
+import {
+  Audio,
+  PlayerButton,
+  PlayerContainer,
+  PlayerDisplay,
+  Playlist,
+  PlaylistAccordion,
+  PlaylistButton,
+  SeekBar,
+  StyledMusicPlayer,
+  Toggle,
+  TrackDuration,
+  TrackItem,
+  TrackList,
+  VolumeBar,
+  VolumeBarWrapper,
+  VolumeControl,
+} from "./MusicPlayer.styles";
+import { LargeIcon } from "@components/LargeIcon/LargeIcon";
+import {
+  ChevronDown,
+  Music,
+  Play,
+  Volume,
+  Volume1,
+  Volume2,
+  Volume3,
+} from "pixelarticons/react";
+import { useTheme } from "styled-components";
+import { ScrollingText } from "./components/ScrollingText";
 
-const TrackList = styled.ul`
-  list-style: none;
-  padding: 0;
-  margin: 8px 0;
-`;
 
-const TrackItem = styled.li<{ $isActive: boolean }>`
-  padding: 8px;
-  margin: 4px 0;
-  background-color: ${(props) =>
-    props.$isActive ? props.theme.colors.medium : props.theme.colors.light};
-  cursor: pointer;
-  border-radius: 4px;
-  &:hover {
-    background-color: ${(props) => props.theme.colors.secondaryLight};
-  }
-`;
+const getVolumeIcon = (vol: number) => {
+  if(vol == 0) return <Volume />;
+  if(vol <= 0.33) return <Volume1 />;
+  if(vol <= 0.66) return <Volume2 />;
+  return <Volume3 />;
+};
+
+const formatTime = (seconds: number) => {
+  if (isNaN(seconds)) return '00:00';
+  const mins = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60);
+  return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+};
 
 interface Track {
   title: string;
@@ -29,9 +55,20 @@ interface Track {
 }
 
 export function MusicPlayer() {
+  const theme = useTheme();
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleOpen = () => setIsOpen(!isOpen);
+
   const [tracks, setTracks] = useState<Track[]>([]);
   const [currentTrack, setCurrentTrack] = useState<Track | null>(null);
+  
   const [loading, setLoading] = useState(true);
+  
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [currentProgress, setCurrentProgress] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [volume, setVolume] = useState(0.7);
+    
   const audioRef = useRef<HTMLAudioElement>(null);
 
   const { sdk, error: sdkError } = useAudiusSdk(
@@ -75,48 +112,63 @@ export function MusicPlayer() {
   }, [sdk]);
 
   useEffect(() => {
-    if(!currentTrack || !audioRef.current) return;
-
+    if (!currentTrack || !audioRef.current) return;
     const audio = audioRef.current;
+    setDuration(0);
 
+    //reset
+    const handlePlay = () => setIsPlaying(true);
+    const handlePause = () => setIsPlaying(false);
+    const handleTimeUpdate = () => {
+      setCurrentProgress((audio.currentTime / audio.duration) * 100 || 0);
+    };
+    const handleLoadedMetadata = () => setDuration(audio.duration);
+    const handleVolumeChange = () => setVolume(audio.volume);
+
+    audio.addEventListener('play', handlePlay);
+    audio.addEventListener('pause', handlePause);
+    audio.addEventListener('timeupdate', handleTimeUpdate);
+    audio.addEventListener('loadedmetadata', handleLoadedMetadata);
+    audio.addEventListener('volumechange', handleVolumeChange);
+
+    //config new track
     audio.pause();
     audio.src = currentTrack.stream.url;
     audio.currentTime = 0;
 
     const handleEnded = () => {
-      if(tracks.length === 0) return;
+      if (tracks.length === 0) return;
 
-      const currentIndex = tracks.findIndex( t => t.title === currentTrack.title);
+      const currentIndex = tracks.findIndex(
+        (t) => t.title === currentTrack.title,
+      );
       const nextIndex = (currentIndex + 1) % tracks.length;
       setCurrentTrack(tracks[nextIndex]);
-      
+
       setTimeout(() => {
-    audioRef.current?.play().catch(e => console.error(e));
-  }, 50);
+        audioRef.current?.play().catch((e) => console.error(e));
+      }, 100);
     };
 
-    audio.addEventListener('ended', handleEnded);
+    audio.addEventListener("ended", handleEnded);
 
     return () => {
-      audio.removeEventListener('ended', handleEnded);
+      audio.removeEventListener("ended", handleEnded);
+      audio.removeEventListener('play', handlePlay);
+      audio.removeEventListener('pause', handlePause);
+      audio.removeEventListener('timeupdate', handleTimeUpdate);
+      audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
+      audio.removeEventListener('volumechange', handleVolumeChange);
     };
-
   }, [currentTrack, tracks]);
 
-  // useEffect(() => {
-  //   if (currentTrack && audioRef.current) {
-  //     audioRef.current.src = currentTrack.stream.url;
-  //     audioRef.current.load();
-  //   }
-  // }, [currentTrack]);
-
   const handleTrackClick = (track: Track) => {
-  if (currentTrack?.title === track.title) return;
+    if (currentTrack?.title === track.title) return;
     setCurrentTrack(track);
 
     setTimeout(() => {
-    audioRef.current?.play().catch(e => console.error(e));
-  }, 50);
+      audioRef.current?.play().catch((e) => console.error(e));
+    }, 50);
 
     // if (audioRef.current) {
     //   audioRef.current.pause();
@@ -132,6 +184,34 @@ export function MusicPlayer() {
     // }
   };
 
+  const togglePlayPause = () => {
+  if (isPlaying) audioRef.current?.pause();
+  else audioRef.current?.play().catch(e => console.error(e));
+};
+
+const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const percent = parseFloat(e.target.value);
+  setCurrentProgress(percent);
+  if (audioRef.current && duration) {
+    audioRef.current.currentTime = (percent / 100) * duration;
+  }
+};
+
+const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const vol = parseFloat(e.target.value);
+  setVolume(vol);
+  if (audioRef.current) audioRef.current.volume = vol;
+};
+
+const toggleMute = () => {
+  if (audioRef.current) {
+    if (audioRef.current.volume === 0) {
+      audioRef.current.volume = volume === 0 ? 0.7 : volume;
+    } else {
+      audioRef.current.volume = 0;
+    }
+  }
+};
   if (sdkError) {
     return <Window title="music player.exe">Erro: {sdkError}</Window>;
   }
@@ -141,18 +221,80 @@ export function MusicPlayer() {
   }
   return (
     <Window title="music player.exe">
-      <audio ref={audioRef} controls></audio>
-      <TrackList>
-        {tracks.map((track, index) => (
-          <TrackItem
-            key={index}
-            $isActive={currentTrack?.title === track.title}
-            onClick={() => handleTrackClick(track)}
-          >
-            {track.title}
-          </TrackItem>
-        ))}
-      </TrackList>
+      <Audio ref={audioRef}></Audio>
+      <StyledMusicPlayer>
+        <PlayerButton onClick={togglePlayPause}>
+          <LargeIcon size={48}>
+            {isPlaying ? '||' : <Play/> }
+          </LargeIcon>
+        </PlayerButton>
+
+        <PlayerDisplay>
+          <PlayerContainer>
+            <LargeIcon size={32}><Music /></LargeIcon>
+            <ScrollingText text={currentTrack?.title || ''} />
+          </PlayerContainer>
+          <PlayerContainer>
+          <SeekBar
+            value={currentProgress}
+            onChange={handleSeek}  
+            style={{
+                background: `linear-gradient(
+                  to right,
+                  ${theme.colors.secondaryDark} 0%,
+                  ${theme.colors.secondaryDark} ${currentProgress}%,
+                  ${theme.colors.medium} ${currentProgress}%,
+                  ${theme.colors.medium} 100%
+                )`
+            }}
+          />
+          <TrackDuration>
+            {formatTime(currentProgress)}/{formatTime(duration)}</TrackDuration>
+          </PlayerContainer>
+        </PlayerDisplay>
+
+        <VolumeControl>
+          <VolumeBarWrapper>
+            <VolumeBar
+              min="0"
+              max="1"
+              step="0.01"
+              value={volume}
+              onChange={handleVolumeChange}
+              style={{background: `${theme.colors.secondaryDark}`}}
+            />
+          </VolumeBarWrapper>
+          <PlayerButton>
+            <LargeIcon size={48} onClick={toggleMute}>
+            {getVolumeIcon(volume)}
+          </LargeIcon>
+          </PlayerButton>
+        </VolumeControl>
+      </StyledMusicPlayer>
+
+      <PlaylistAccordion $isOpen={isOpen}>
+        <PlaylistButton onClick={toggleOpen} $isOpen={isOpen}>
+          playlist
+          <Toggle $isOpen={isOpen}>
+            <LargeIcon>
+              <ChevronDown />
+            </LargeIcon>
+          </Toggle>
+        </PlaylistButton>
+        <Playlist $isOpen={isOpen}>
+          <TrackList>
+          {tracks.map((track, index) => (
+            <TrackItem
+              key={index}
+              $isActive={currentTrack?.title === track.title}
+              onClick={() => handleTrackClick(track)}
+            >
+              {track.title}
+            </TrackItem>
+          ))}
+        </TrackList>
+        </Playlist>
+      </PlaylistAccordion>
     </Window>
   );
 }
