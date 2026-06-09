@@ -1,6 +1,17 @@
 // components/Toolbar.tsx
-import { IconButton } from '../PaintCanvas.styles';
+import styled from 'styled-components';
 import { Download, SprayImage, Trash } from 'pixelarticons/react';
+import { IconButton } from '@components/common/IconButton/IconButton';
+
+const ToolButton = styled(IconButton)<{ $active?: boolean}>`
+  color: ${props => props.$active ? props.theme.colors.medium : props.theme.colors.dark};
+  opacity: ${props => props.$active ? 1 : 0.7};
+  transition: all 0.2s;
+  &:hover {
+    opacity: 1;
+    color: ${props => props.theme.colors.medium};
+  }
+`
 
 interface ToolbarProps {
   isBucketMode: boolean;
@@ -12,15 +23,15 @@ interface ToolbarProps {
 export function Toolbar({ isBucketMode, onToggleBucket, onSave, onClear }: ToolbarProps) {
   return (
     <div style={{ display: 'flex', gap: '8px' }}>
-      <IconButton onClick={onToggleBucket} $active={isBucketMode}>
+      <ToolButton size={24} onClick={onToggleBucket} $active={isBucketMode}>
         <SprayImage />
-      </IconButton>
-      <IconButton onClick={onClear}>
+      </ToolButton>
+      <ToolButton size={24} onClick={onClear}>
         <Trash/>
-      </IconButton>
-      <IconButton onClick={onSave}>
+      </ToolButton>
+      <ToolButton size={24} onClick={onSave}>
         <Download />
-      </IconButton>
+      </ToolButton>
     </div>
   );
 }

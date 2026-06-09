@@ -3,7 +3,6 @@ import { useAudiusSdk } from "./hooks/useAudiusSdk";
 import { useEffect, useRef, useState } from "react";
 import {
   Audio,
-  PlayerButton,
   PlayerContainer,
   PlayerDisplay,
   Playlist,
@@ -19,7 +18,7 @@ import {
   VolumeBarWrapper,
   VolumeControl,
 } from "./MusicPlayer.styles";
-import { LargeIcon } from "@components/common/LargeIcon/LargeIcon";
+import { Icon } from "@components/common/Icon/Icon";
 import {
   ChevronDown,
   Music,
@@ -31,6 +30,7 @@ import {
 } from "pixelarticons/react";
 import { useTheme } from "styled-components";
 import { ScrollingText } from "./components/ScrollingText";
+import { IconButton } from "@components/common/IconButton/IconButton";
 
 
 const getVolumeIcon = (vol: number) => {
@@ -223,15 +223,13 @@ const toggleMute = () => {
     <Window title="music player.exe">
       <Audio ref={audioRef}></Audio>
       <StyledMusicPlayer>
-        <PlayerButton onClick={togglePlayPause}>
-          <LargeIcon size={48}>
+        <IconButton size={48} onClick={togglePlayPause}>
             {isPlaying ? '||' : <Play/> }
-          </LargeIcon>
-        </PlayerButton>
+        </IconButton>
 
         <PlayerDisplay>
           <PlayerContainer>
-            <LargeIcon size={32}><Music /></LargeIcon>
+            <Icon size={32}><Music /></Icon>
             <ScrollingText text={currentTrack?.title || ''} />
           </PlayerContainer>
           <PlayerContainer>
@@ -264,11 +262,9 @@ const toggleMute = () => {
               style={{background: `${theme.colors.secondaryDark}`}}
             />
           </VolumeBarWrapper>
-          <PlayerButton>
-            <LargeIcon size={48} onClick={toggleMute}>
+          <IconButton size={48} onClick={toggleMute}>
             {getVolumeIcon(volume)}
-          </LargeIcon>
-          </PlayerButton>
+          </IconButton>
         </VolumeControl>
       </StyledMusicPlayer>
 
@@ -276,9 +272,9 @@ const toggleMute = () => {
         <PlaylistButton onClick={toggleOpen} $isOpen={isOpen}>
           playlist
           <Toggle $isOpen={isOpen}>
-            <LargeIcon>
+            <Icon>
               <ChevronDown />
-            </LargeIcon>
+            </Icon>
           </Toggle>
         </PlaylistButton>
         <Playlist $isOpen={isOpen}>

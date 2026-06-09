@@ -12,18 +12,6 @@ export const StyledMusicPlayer = styled.div`
   width: 100%;
 `
 
-export const PlayerButton = styled.button`
-  &:hover {
-    color: ${props => props.theme.colors.secondaryDark}
-  }
-
-  @media (max-width: 432px) {
-    svg {
-      width: 32px;
-      heigh: 32px;
-    }
-  }
-`
 export const PlayerDisplay = styled.div`
   display: flex;
   flex-direction: column;

@@ -51,6 +51,9 @@ const GlobalStyles = createGlobalStyle`
     color: inherit;
     cursor: pointer;
     outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
 `;

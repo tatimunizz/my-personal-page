@@ -23,20 +23,3 @@ export const CanvasTools = styled.div`
   justify-content: space-between;
   gap: 10px;
 `
-
-export const IconButton = styled.button<{ $active?: boolean}>`
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: ${props => props.$active ? props.theme.colors.medium : props.theme.colors.dark};
-  opacity: ${props => props.$active ? 1 : 0.7};
-  transition: all 0.2s;
-  &:hover {
-    opacity: 1;
-    color: ${props => props.theme.colors.medium};
-  }
-`

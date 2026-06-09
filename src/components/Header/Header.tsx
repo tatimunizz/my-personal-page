@@ -1,5 +1,5 @@
 
-import { LargeIcon } from '@components/common/LargeIcon/LargeIcon';
+import { Icon } from '@components/common/Icon/Icon';
 import {StyledHeader, HeaderTitle, NavBar} from './Header.styles';
 import { Folder, Image, ListBox, User } from 'pixelarticons/react';
 import { Link } from 'react-router-dom';
@@ -14,19 +14,19 @@ export function Header() {
       <NavBar>
         <ul>
           <li><Link to ="/about-me">
-            <LargeIcon><User/></LargeIcon>
+            <Icon><User/></Icon>
             about me
           </Link></li>
           <li><a href="#">
-            <LargeIcon><Image/></LargeIcon>
+            <Icon><Image/></Icon>
             images
           </a></li>
           <li><a href="#">
-            <LargeIcon><ListBox/></LargeIcon>
+            <Icon><ListBox/></Icon>
             my lists
           </a></li>
           <li><a href="#">
-            <LargeIcon><Folder/></LargeIcon>
+            <Icon><Folder/></Icon>
             projects
           </a></li>
         </ul>
