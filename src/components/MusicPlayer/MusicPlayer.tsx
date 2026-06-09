@@ -31,20 +31,20 @@ import {
 import { useTheme } from "styled-components";
 import { ScrollingText } from "./components/ScrollingText";
 import { IconButton } from "@components/common/IconButton/IconButton";
-
+import { Accordion } from "@components/common/Accordion/Accordion";
 
 const getVolumeIcon = (vol: number) => {
-  if(vol == 0) return <Volume />;
-  if(vol <= 0.33) return <Volume1 />;
-  if(vol <= 0.66) return <Volume2 />;
+  if (vol == 0) return <Volume />;
+  if (vol <= 0.33) return <Volume1 />;
+  if (vol <= 0.66) return <Volume2 />;
   return <Volume3 />;
 };
 
 const formatTime = (seconds: number) => {
-  if (isNaN(seconds)) return '00:00';
+  if (isNaN(seconds)) return "00:00";
   const mins = Math.floor(seconds / 60);
   const secs = Math.floor(seconds % 60);
-  return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
 };
 
 interface Track {
@@ -61,14 +61,14 @@ export function MusicPlayer() {
 
   const [tracks, setTracks] = useState<Track[]>([]);
   const [currentTrack, setCurrentTrack] = useState<Track | null>(null);
-  
+
   const [loading, setLoading] = useState(true);
-  
+
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentProgress, setCurrentProgress] = useState(0);
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(0.7);
-    
+
   const audioRef = useRef<HTMLAudioElement>(null);
 
   const { sdk, error: sdkError } = useAudiusSdk(
@@ -125,11 +125,11 @@ export function MusicPlayer() {
     const handleLoadedMetadata = () => setDuration(audio.duration);
     const handleVolumeChange = () => setVolume(audio.volume);
 
-    audio.addEventListener('play', handlePlay);
-    audio.addEventListener('pause', handlePause);
-    audio.addEventListener('timeupdate', handleTimeUpdate);
-    audio.addEventListener('loadedmetadata', handleLoadedMetadata);
-    audio.addEventListener('volumechange', handleVolumeChange);
+    audio.addEventListener("play", handlePlay);
+    audio.addEventListener("pause", handlePause);
+    audio.addEventListener("timeupdate", handleTimeUpdate);
+    audio.addEventListener("loadedmetadata", handleLoadedMetadata);
+    audio.addEventListener("volumechange", handleVolumeChange);
 
     //config new track
     audio.pause();
@@ -154,11 +154,11 @@ export function MusicPlayer() {
 
     return () => {
       audio.removeEventListener("ended", handleEnded);
-      audio.removeEventListener('play', handlePlay);
-      audio.removeEventListener('pause', handlePause);
-      audio.removeEventListener('timeupdate', handleTimeUpdate);
-      audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
-      audio.removeEventListener('volumechange', handleVolumeChange);
+      audio.removeEventListener("play", handlePlay);
+      audio.removeEventListener("pause", handlePause);
+      audio.removeEventListener("timeupdate", handleTimeUpdate);
+      audio.removeEventListener("loadedmetadata", handleLoadedMetadata);
+      audio.removeEventListener("volumechange", handleVolumeChange);
     };
   }, [currentTrack, tracks]);
 
@@ -185,33 +185,33 @@ export function MusicPlayer() {
   };
 
   const togglePlayPause = () => {
-  if (isPlaying) audioRef.current?.pause();
-  else audioRef.current?.play().catch(e => console.error(e));
-};
+    if (isPlaying) audioRef.current?.pause();
+    else audioRef.current?.play().catch((e) => console.error(e));
+  };
 
-const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
-  const percent = parseFloat(e.target.value);
-  setCurrentProgress(percent);
-  if (audioRef.current && duration) {
-    audioRef.current.currentTime = (percent / 100) * duration;
-  }
-};
-
-const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  const vol = parseFloat(e.target.value);
-  setVolume(vol);
-  if (audioRef.current) audioRef.current.volume = vol;
-};
-
-const toggleMute = () => {
-  if (audioRef.current) {
-    if (audioRef.current.volume === 0) {
-      audioRef.current.volume = volume === 0 ? 0.7 : volume;
-    } else {
-      audioRef.current.volume = 0;
+  const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const percent = parseFloat(e.target.value);
+    setCurrentProgress(percent);
+    if (audioRef.current && duration) {
+      audioRef.current.currentTime = (percent / 100) * duration;
     }
-  }
-};
+  };
+
+  const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const vol = parseFloat(e.target.value);
+    setVolume(vol);
+    if (audioRef.current) audioRef.current.volume = vol;
+  };
+
+  const toggleMute = () => {
+    if (audioRef.current) {
+      if (audioRef.current.volume === 0) {
+        audioRef.current.volume = volume === 0 ? 0.7 : volume;
+      } else {
+        audioRef.current.volume = 0;
+      }
+    }
+  };
   if (sdkError) {
     return <Window title="music player.exe">Erro: {sdkError}</Window>;
   }
@@ -224,30 +224,33 @@ const toggleMute = () => {
       <Audio ref={audioRef}></Audio>
       <StyledMusicPlayer>
         <IconButton size={48} onClick={togglePlayPause}>
-            {isPlaying ? '||' : <Play/> }
+          {isPlaying ? "||" : <Play />}
         </IconButton>
 
         <PlayerDisplay>
           <PlayerContainer>
-            <Icon size={32}><Music /></Icon>
-            <ScrollingText text={currentTrack?.title || ''} />
+            <Icon size={32}>
+              <Music />
+            </Icon>
+            <ScrollingText text={currentTrack?.title || ""} />
           </PlayerContainer>
           <PlayerContainer>
-          <SeekBar
-            value={currentProgress}
-            onChange={handleSeek}  
-            style={{
+            <SeekBar
+              value={currentProgress}
+              onChange={handleSeek}
+              style={{
                 background: `linear-gradient(
                   to right,
                   ${theme.colors.secondaryDark} 0%,
                   ${theme.colors.secondaryDark} ${currentProgress}%,
                   ${theme.colors.medium} ${currentProgress}%,
                   ${theme.colors.medium} 100%
-                )`
-            }}
-          />
-          <TrackDuration>
-            {formatTime(currentProgress)}/{formatTime(duration)}</TrackDuration>
+                )`,
+              }}
+            />
+            <TrackDuration>
+              {formatTime(currentProgress)}/{formatTime(duration)}
+            </TrackDuration>
           </PlayerContainer>
         </PlayerDisplay>
 
@@ -259,7 +262,7 @@ const toggleMute = () => {
               step="0.01"
               value={volume}
               onChange={handleVolumeChange}
-              style={{background: `${theme.colors.secondaryDark}`}}
+              style={{ background: `${theme.colors.secondaryDark}` }}
             />
           </VolumeBarWrapper>
           <IconButton size={48} onClick={toggleMute}>
@@ -268,6 +271,22 @@ const toggleMute = () => {
         </VolumeControl>
       </StyledMusicPlayer>
 
+      <Accordion isOpen={isOpen} onToggle={toggleOpen} buttonText="playlist">
+        <Playlist $isOpen={isOpen}>
+          <TrackList>
+            {tracks.map((track, index) => (
+              <TrackItem
+                key={index}
+                $isActive={currentTrack?.title === track.title}
+                onClick={() => handleTrackClick(track)}
+              >
+                {track.title}
+              </TrackItem>
+            ))}
+          </TrackList>
+        </Playlist>
+      </Accordion>
+      {/*       
       <PlaylistAccordion $isOpen={isOpen}>
         <PlaylistButton onClick={toggleOpen} $isOpen={isOpen}>
           playlist
@@ -279,18 +298,18 @@ const toggleMute = () => {
         </PlaylistButton>
         <Playlist $isOpen={isOpen}>
           <TrackList>
-          {tracks.map((track, index) => (
-            <TrackItem
-              key={index}
-              $isActive={currentTrack?.title === track.title}
-              onClick={() => handleTrackClick(track)}
-            >
-              {track.title}
-            </TrackItem>
-          ))}
-        </TrackList>
+            {tracks.map((track, index) => (
+              <TrackItem
+                key={index}
+                $isActive={currentTrack?.title === track.title}
+                onClick={() => handleTrackClick(track)}
+              >
+                {track.title}
+              </TrackItem>
+            ))}
+          </TrackList>
         </Playlist>
-      </PlaylistAccordion>
+      </PlaylistAccordion> */}
     </Window>
   );
 }
