@@ -1,7 +1,7 @@
 import { MobileButton, SideBarContent, StyledSideBar, Toggle, MobileAccordion } from "./SideBar.styles";
 import { PalettePicker } from "@components/PalettePicker/PalettePicker";
 import { PaintCanvas } from "@components/PaintCanvas/PaintCanvas";
-import { LargeIcon } from "@components/LargeIcon/LargeIcon";
+import { LargeIcon } from "@components/common/LargeIcon/LargeIcon";
 import { ChevronDown } from "pixelarticons/react";
 import { useState } from "react";
 import { WeatherWidget } from "@components/WeatherWidget/WeatherWidget";

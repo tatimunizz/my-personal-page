@@ -1,8 +1,9 @@
-import { Window } from "@components/Window/Window";
-import { ColorPalette, Selector, StyledPalettePicker } from "./PalettePicker.styles";
+import { Window } from "@components/common/Window/Window";
+import { Selector, StyledPalettePicker } from "./PalettePicker.styles";
 import { ChevronLeft, ChevronRight } from "pixelarticons/react";
 import { useTheme } from "@/providers/ThemeProvider";
-import { LargeIcon } from "@components/LargeIcon/LargeIcon";
+import { LargeIcon } from "@components/common/LargeIcon/LargeIcon";
+import { ColorPalette } from "@components/common/ColorPalette/ColorPalette";
 
 export function PalettePicker() {
   const {theme, nextTheme, prevTheme} = useTheme();
@@ -14,7 +15,7 @@ export function PalettePicker() {
         Palette picker
         <Selector>
           <LargeIcon onClick={prevTheme} style={{cursor:'pointer'}}><ChevronLeft/></LargeIcon>
-          <ColorPalette colors={colors}/>
+          <ColorPalette size={5} shadow={true} colors={colors}/>
           <LargeIcon onClick={nextTheme} style={{cursor:'pointer'}}><ChevronRight/></LargeIcon>
         </Selector>
       </StyledPalettePicker>

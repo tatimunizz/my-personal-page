@@ -1,5 +1,5 @@
 
-import { LargeIcon } from '@components/LargeIcon/LargeIcon';
+import { LargeIcon } from '@components/common/LargeIcon/LargeIcon';
 import {StyledHeader, HeaderTitle, NavBar} from './Header.styles';
 import { Folder, Image, ListBox, User } from 'pixelarticons/react';
 import { Link } from 'react-router-dom';

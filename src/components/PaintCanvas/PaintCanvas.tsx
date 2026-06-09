@@ -1,4 +1,4 @@
-import { Window } from "@components/Window/Window";
+import { Window } from "@components/common/Window/Window";
 import { Canvas, CanvasTools, StyledPaintCanvas } from "./PaintCanvas.styles";
 import { useTheme } from "@/providers/ThemeProvider";
 import { useRef, useState } from "react";
@@ -6,7 +6,7 @@ import { useCanvasSetup } from "./hooks/useCanvasSetup";
 import { useDrawing } from "./hooks/useDrawing";
 import { Toolbar } from "./components/Toolbar";
 import { useSaveCanvas } from "./hooks/useSaveCanvas";
-import { ColorPalette } from "./components/ColorPalette";
+import { ColorPalette } from "@components/common/ColorPalette/ColorPalette";
 
 interface PaintCanvasProps {
   gridSize?: number;
@@ -47,7 +47,7 @@ export function PaintCanvas({gridSize = 24}: PaintCanvasProps) {
           onTouchEnd={handleTouchEnd}
         />
         <CanvasTools>
-          <ColorPalette colors={colors.slice(0, 4)} onSelectColor={setSelectedColor}/>
+          <ColorPalette size={4} pointer={true} colors={colors.slice(0, 4)} onSelectColor={setSelectedColor}/>
           <Toolbar 
             isBucketMode={isBucketMode}
             onToggleBucket={() => setIsBucketMode(!isBucketMode)}

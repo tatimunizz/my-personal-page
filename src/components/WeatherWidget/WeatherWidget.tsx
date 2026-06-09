@@ -1,4 +1,4 @@
-import { Widget } from "@components/Widget/Widget";
+import { Widget } from "@components/common/Widget/Widget";
 import { useWeather } from "./hooks/useWeather";
 import { PxlKitIcon } from "@pxlkit/core";
 import { Cloud, CloudSun, Rain, Snow, Sun, Thunder } from "@pxlkit/weather";

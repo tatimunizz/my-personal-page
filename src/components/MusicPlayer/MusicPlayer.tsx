@@ -1,4 +1,4 @@
-import { Window } from "@components/Window/Window";
+import { Window } from "@components/common/Window/Window";
 import { useAudiusSdk } from "./hooks/useAudiusSdk";
 import { useEffect, useRef, useState } from "react";
 import {
@@ -19,7 +19,7 @@ import {
   VolumeBarWrapper,
   VolumeControl,
 } from "./MusicPlayer.styles";
-import { LargeIcon } from "@components/LargeIcon/LargeIcon";
+import { LargeIcon } from "@components/common/LargeIcon/LargeIcon";
 import {
   ChevronDown,
   Music,
