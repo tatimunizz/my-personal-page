@@ -32,34 +32,6 @@ export const TrackTitle = styled.div`
   width: 100%;
 `
 
-export const SeekBar = styled.input.attrs({ type: 'range'})`
-  width: 100%;
-  height: 4px;
-  -webkit-appearance: none;
-  outline: none;
-  background-color: ${props => props.theme.colors.medium}
-  
-  &::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 12px;
-    height: 12px;
-    background: ${props => props.theme.colors.dark};
-    cursor: pointer;
-    border: none;
-    border-radius: 0px;
-  }
-
-  /* Firefox */
-  &::-moz-range-thumb {
-    width: 12px;
-    height: 12px;
-    background: ${props => props.theme.colors.dark};
-    cursor: pointer;
-    border: none;
-    border-radius: 0px;
-  }
-`
-
 export const TrackDuration = styled.div`
   font-size: ${props => props.theme.typography.fontSize.xxsmall};
 `
@@ -127,65 +99,3 @@ export const VolumeControl = styled(VolumeContainer)`
     pointer-events: auto;
   }
 `
-
-// export const VolumeContainerHover = styled(VolumeContainer)`
-//   &:hover ${VolumeBarWrapper} {
-//     width: 84px;
-//     opacity: 1;
-//     pointer-events: auto;   /* permite interagir com a barra */
-//   }
-// `
-
-export const PlaylistAccordion = styled.div<{ $isOpen: boolean }>`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  // gap: 24px;
-  // padding: 0px 20px;
-  // padding-bottom: ${props => props.$isOpen ? '20px' : '0px'};
-
-  // background-color: ${props => props.theme.colors.light};
-  // border: 2px solid ${props => props.theme.colors.dark};
-  // box-shadow: 8px 8px 0px ${props => props.theme.colors.dark};
-  transition: all 0.3s ease;
-`;
-
-export const PlaylistButton = styled.div<{$isOpen: boolean}>`
-  display: flex;
-  justify-content: space-between;
-  // background-color: ${props => props.theme.colors.light};
-  width: 100%;
-  padding-top: 8px;
-  align-items: center;
-  // border-bottom: ${props => props.$isOpen ? '2px solid ' + props.theme.colors.dark : 'none'};
-  box-shaddow: none;
-`
-
-export const Toggle = styled.div<{$isOpen: boolean}>`
-  transform: rotate(${props => props.$isOpen ? '180deg' : '0deg'});
-  transition: transform 0.2s ease;
-  display: inline-flex;
-  align-items: center;
-`
-
-export const Playlist = styled.div<{$isOpen: boolean}>`
-  display: ${props => props.$isOpen ? 'flex' : 'none'};
-`
-
-export const TrackList = styled.ul`
-  width: 100%;
-  list-style: none;
-  padding: 0;
-  margin: 8px 0;
-`;
-
-export const TrackItem = styled.li<{ $isActive: boolean }>`
-  padding: 8px;
-  margin: 4px 0;
-  background-color: ${(props) =>
-    props.$isActive ? props.theme.colors.medium : props.theme.colors.light};
-  cursor: pointer;
-  &:hover {
-    background-color: ${(props) => props.theme.colors.secondaryLight};
-  }
-`;
