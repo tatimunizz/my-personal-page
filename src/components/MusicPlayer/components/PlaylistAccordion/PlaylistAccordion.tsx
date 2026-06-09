@@ -1,10 +1,6 @@
 import { Accordion } from "@components/common/Accordion/Accordion";
 import { Playlist, TrackItem, TrackList } from "./PlaylistAccodrion.styles";
-
-interface Track {
-  title: string;
-  stream: { url: string; };
-}
+import type { Track } from "components/MusicPlayer/types";
 
 interface PlaylistAccordionProps {
   isOpen: boolean;

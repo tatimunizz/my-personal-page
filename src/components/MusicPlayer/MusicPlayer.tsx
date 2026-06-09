@@ -6,31 +6,23 @@ import {
   PlayerDisplay,
   StyledMusicPlayer,
   TrackDuration,
-  VolumeBar,
-  VolumeBarWrapper,
-  VolumeControl,
 } from "./MusicPlayer.styles";
 import { Icon } from "@components/common/Icon/Icon";
 import {
   Music,
   Play,
 } from "pixelarticons/react";
-import { useTheme } from "styled-components";
 import { ScrollingText } from "./components/ScrollingText";
 import { IconButton } from "@components/common/IconButton/IconButton";
 import { usePlaylist } from "./hooks/usePlaylist";
 import { useAudioPlayer } from "./hooks/useAudioPlayer";
-import { formatTime, getVolumeIcon } from "./utils/audioUtils";
+import { formatTime } from "./utils/audioUtils";
 import { SeekBar } from "./components/SeekBar";
 import { PlaylistAccordion } from "./components/PlaylistAccordion/PlaylistAccordion";
-
-interface Track {
-  title: string;
-  stream: { url: string; };
-}
+import type { Track } from "./types";
+import { VolumeButton } from "./components/VolumeButton/VolumeButton";
 
 export function MusicPlayer() {
-  const theme = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
 
@@ -54,7 +46,7 @@ export function MusicPlayer() {
   };
 
   if (playlistError) {
-    return <Window title="music player.exe">Erro: {[playlistError]}</Window>;
+    return <Window title="music player.exe">Erro: {playlistError}</Window>;
   }
 
   if (loading) {
@@ -83,21 +75,7 @@ export function MusicPlayer() {
             </TrackDuration>
           </PlayerContainer>
         </PlayerDisplay>
-        <VolumeControl>
-          <VolumeBarWrapper>
-            <VolumeBar
-              min="0"
-              max="1"
-              step="0.01"
-              value={volume}
-              onChange={(e) => handleVolumeChange(parseFloat(e.target.value))}
-              style={{ background: `${theme.colors.secondaryDark}` }}
-            />
-          </VolumeBarWrapper>
-          <IconButton size={48} onClick={toggleMute}>
-            {getVolumeIcon(volume)}
-          </IconButton>
-        </VolumeControl>
+        <VolumeButton volume={volume} onVolumeChange={handleVolumeChange} onClick={toggleMute}/>
       </StyledMusicPlayer>
       <PlaylistAccordion isOpen={isOpen} onToggle={toggleOpen} tracks={tracks} currentTrack={currentTrack} onTrackClick={handleTrackClick}/>
     </Window>
