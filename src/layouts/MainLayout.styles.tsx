@@ -4,6 +4,9 @@ export const LayoutContainer = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+
+  height: 100vh;
+  overflow: hidden;
 `;
 
 export const MainContent = styled.main`
@@ -11,7 +14,9 @@ export const MainContent = styled.main`
   padding: ${props => props.theme.global.padding};
   display: flex;
   justify-content: space-between;
-  gap: 24px;
+  gap: 72px;
+
+  overflow-y: auto;
 
   @media (max-width: ${props => props.theme.breakpoints.mobile}) {
     padding: ${props => props.theme.global.xpadding};

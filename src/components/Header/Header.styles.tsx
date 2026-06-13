@@ -61,6 +61,10 @@ export const NavBar = styled.nav`
       flex-direction: column;
       gap: 5px;
       align-items: center;
+
+      &.active {
+        color: ${props => props.theme.colors.medium};
+      }
     }
   }
 `

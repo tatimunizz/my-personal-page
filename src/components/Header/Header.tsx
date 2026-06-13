@@ -2,7 +2,7 @@
 import { Icon } from '@components/common/Icon/Icon';
 import {StyledHeader, HeaderTitle, NavBar} from './Header.styles';
 import { Folder, Image, ListBox, User } from 'pixelarticons/react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export function Header() {
   return (
@@ -13,10 +13,10 @@ export function Header() {
       </HeaderTitle>
       <NavBar>
         <ul>
-          <li><Link to ="/about-me">
+          <li><NavLink to ="/about-me">
             <Icon><User/></Icon>
             about me
-          </Link></li>
+          </NavLink></li>
           <li><a href="#">
             <Icon><Image/></Icon>
             images

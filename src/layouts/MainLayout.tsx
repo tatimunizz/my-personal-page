@@ -9,8 +9,8 @@ export default function MainLayout() {
     <LayoutContainer>
       <Header/>
       <MainContent>
-        <Outlet />  {/* Child routes render here */}
-        <SideBar/>
+          <Outlet />  {/* Child routes render here */}
+          <SideBar/>
       </MainContent>
       <Footer/>
     </LayoutContainer>
