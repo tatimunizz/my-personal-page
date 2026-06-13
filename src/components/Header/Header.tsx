@@ -8,7 +8,7 @@ export function Header() {
   return (
     <StyledHeader>
       <HeaderTitle to="/">
-        <h1>tatiana muniz</h1>
+        <span>tatiana muniz</span>
         <p>personal computer</p>
       </HeaderTitle>
       <NavBar>

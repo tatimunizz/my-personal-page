@@ -14,6 +14,10 @@ export const StyledHeader = styled.header`
     flex-direction: column;
     padding: ${props => props.theme.global.xpadding};
   }
+
+   @media (min-width: 1700px) {
+    padding: 32px 20%;
+  }
   
 `
 
@@ -25,7 +29,7 @@ export const HeaderTitle = styled(Link)`
   flex-direction: column;
   align-self: flex-start;
 
-  h1 {
+  span {
     font-size: ${props => props.theme.typography.fontSize.large};
   }
 
@@ -34,7 +38,7 @@ export const HeaderTitle = styled(Link)`
   }
 
   @media (max-width: ${props => props.theme.breakpoints.mobile}) {
-    h1 {
+    span {
      font-size: ${props => props.theme.typography.fontSize.medium};
     }
 

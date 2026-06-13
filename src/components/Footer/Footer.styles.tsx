@@ -12,6 +12,10 @@ export const StyledFooter = styled.footer`
   @media (max-width: ${props => props.theme.breakpoints.mobile}) {
     padding: ${props => props.theme.global.xpadding};
   }
+
+   @media (min-width: 1700px) {
+    padding: 32px 20%;
+  }
 `
 
 export const FooterNote = styled.div`

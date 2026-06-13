@@ -17,4 +17,8 @@ export const MainContent = styled.main`
     padding: ${props => props.theme.global.xpadding};
     flex-direction: column;
   }
+
+  @media (min-width: 1700px) {
+    padding: 32px 20%;
+  }
 `;
