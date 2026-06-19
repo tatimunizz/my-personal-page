@@ -3,23 +3,15 @@ import { ContentBox } from "@components/common/Window/Window.styles";
 import styled from "styled-components";
 
 export const StyledAboutMe = styled(Window)`
-  
+  width: 100%;
   ${ContentBox} {
     display: flex;
+    flex-direction: column;
     gap: 8px;
   }
 `
 
-const hexToRgb = (hex: string) => {
-  const r = parseInt(hex.slice(1,3), 16);
-  const g = parseInt(hex.slice(3,5), 16);
-  const b = parseInt(hex.slice(5,7), 16);
-  return `${r}, ${g}, ${b}`;
-};
-
-export const SideBar = styled.aside`
-  background-color: rgba(${props => hexToRgb(props.theme.colors.medium)}, 0.1);
-  padding: 8px 0;
+export const TopBar = styled.aside`
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -33,5 +25,28 @@ export const SideBar = styled.aside`
 `
 
 export const TextArea = styled.div`
+
+`
+
+export const Section = styled.section`
+display: flex;
+flex-direction: column;
+gap: 8px;
+
+h2 { 
+  font-size: ${props => props.theme.typography.fontSize.medium};
+}
+
+h3 {
+  font-size: ${props => props.theme.typography.fontSize.medium};
+  border-bottom: 1px solid ${props => props.theme.colors.secondaryDark};
+  margin-left: 8px;
+}
+
+p {
+  margin-left: 8px;
+  text-align: justify;
+  
+}
 
 `
