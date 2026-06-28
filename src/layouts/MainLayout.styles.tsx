@@ -15,6 +15,7 @@ export const MainContent = styled.main`
   display: flex;
   justify-content: space-between;
   gap: 72px;
+  position: relative;
 
   overflow-y: auto;
 

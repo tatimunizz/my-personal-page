@@ -14,7 +14,6 @@ export function ColorPalette({shadow, size, pointer, colors, onSelectColor}: Col
       {colors.map((color, index) =>
         <Swatch key={index} color={color}
           onClick={onSelectColor ? () => onSelectColor(color) : undefined}>
-         
         </Swatch>
       )}
     </Palette>

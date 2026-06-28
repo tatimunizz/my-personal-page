@@ -14,3 +14,9 @@ export const Selector = styled.div`
   width: 100%;
   gap: 10px;
 `
+
+export const SliderContainer = styled.div`
+  overflow: hidden;
+  flex: 1;
+  width: 100%;
+`

@@ -29,6 +29,7 @@
       "@styles/*": ["./src/styles/*"],
       "@assets/*": ["./src/assets/*"],
       "@apis/*": ["./src/apis/*"],
+      "@contexts/*": ["./src/contexts/*"],
 
     }
   },
