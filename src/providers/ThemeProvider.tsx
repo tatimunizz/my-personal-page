@@ -7,6 +7,7 @@ type ThemeContextType = {
   themeName: ThemeName;
   nextTheme: () => void;
   prevTheme: () => void;
+  setTheme: (name: ThemeName) => void;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -36,10 +37,14 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     setThemeName(themeList[prevIndex]);
   }, [themeName]);
 
+  const setTheme = useCallback((name: ThemeName) => {
+    setThemeName(name);
+  }, []);
+
   const theme = themes[themeName];
 
   return (
-    <ThemeContext.Provider value={{ theme, themeName, nextTheme, prevTheme }}>
+    <ThemeContext.Provider value={{ theme, themeName, nextTheme, prevTheme, setTheme }}>
       <StyledThemeProvider theme={theme}>{children}</StyledThemeProvider>
     </ThemeContext.Provider>
   );

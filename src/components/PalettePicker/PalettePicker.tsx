@@ -8,16 +8,18 @@ import { ChevronLeft, ChevronRight } from "pixelarticons/react";
 import { useTheme } from "@/providers/ThemeProvider";
 import { ColorPalette } from "@components/common/ColorPalette/ColorPalette";
 import { IconButton } from "@components/common/IconButton/IconButton";
-import { themes } from "@styles/theme";
+import { themes, type ThemeName } from "@styles/theme";
 
 import useEmblaCarousel from "embla-carousel-react";
 import { useCallback, useEffect, useRef } from "react";
 
 export function PalettePicker() {
-  const { nextTheme, prevTheme, themeName } = useTheme();
+  const { nextTheme, prevTheme, themeName, setTheme } = useTheme();
   const palettes = Object.values(themes).map((t) => Object.values(t.colors));
   const themeNames = Object.keys(themes);
   const currentIndex = themeNames.indexOf(themeName);
+
+  const isInternalUpdate = useRef(false);
 
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: true,
@@ -27,32 +29,53 @@ export function PalettePicker() {
     watchResize: true,
   });
 
-  const isNavigating = useRef(false);
-
-  useEffect(() => {
-    if (emblaApi && currentIndex >= 0 && !isNavigating.current) {
+    useEffect(() => {
+    if (emblaApi && currentIndex >= 0) {
+      isInternalUpdate.current = true;
       emblaApi.scrollTo(currentIndex, false);
+      setTimeout(() => {
+        isInternalUpdate.current = false;
+      }, 50);
     }
   }, [emblaApi, currentIndex]);
 
+    useEffect(() => {
+    if (!emblaApi) return;
+
+    const onSelect = () => {
+      if (isInternalUpdate.current) return;
+
+      const index = emblaApi.selectedScrollSnap();
+      const newThemeName = themeNames[index % themeNames.length] as ThemeName;
+      if (newThemeName !== themeName) {
+        setTheme(newThemeName);
+      }
+    };
+    emblaApi.on("select", onSelect);
+
+    return () => {
+      emblaApi.off("select", onSelect);
+    };
+  }, [emblaApi, themeName, themeNames, setTheme]);
+
   const handlePrev = useCallback(() => {
     if (emblaApi) {
-      isNavigating.current = true;
+      isInternalUpdate.current = true;
       emblaApi.scrollPrev();
       prevTheme();
       setTimeout(() => {
-        isNavigating.current = false;
+      isInternalUpdate.current = false;
       }, 300);
     }
   }, [emblaApi, prevTheme]);
 
   const handleNext = useCallback(() => {
     if (emblaApi) {
-      isNavigating.current = true;
+      isInternalUpdate.current = true;
       emblaApi.scrollNext();
       nextTheme();
       setTimeout(() => {
-        isNavigating.current = false;
+      isInternalUpdate.current = false;
       }, 300);
     }
   }, [emblaApi, nextTheme]);
