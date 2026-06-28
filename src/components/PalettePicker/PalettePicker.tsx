@@ -23,7 +23,8 @@ export function PalettePicker() {
     loop: true,
     align: "start",
     slidesToScroll: 1,
-    duration: 20,
+    duration: 10,
+    watchResize: true,
   });
 
   const isNavigating = useRef(false);
@@ -66,7 +67,7 @@ export function PalettePicker() {
           </IconButton>
           <SliderContainer>
             <div ref={emblaRef} style={{ overflow: "hidden", width: "100%" }}>
-              <div style={{ display: "flex", width: "100%" }}>
+              <div style={{ display: "flex", width: "100%", touchAction: "pan-y pinch-zoom" }}>
                 {palettes.map((colors, index) => (
                   <div
                     key={index}

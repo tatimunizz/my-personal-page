@@ -19,4 +19,5 @@ export const SliderContainer = styled.div`
   overflow: hidden;
   flex: 1;
   width: 100%;
+  
 `

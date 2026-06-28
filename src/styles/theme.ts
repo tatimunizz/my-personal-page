@@ -131,11 +131,78 @@ export const deepSeaTheme: Theme = {
   }
 };
 
+export const twilightTheme: Theme = {
+  colors: {
+    dark: '#292831',
+    secondaryDark: '#333f58',
+    medium: '#4a7a96',
+    light: '#ee8695',
+    secondaryLight: '#fbbbad'
+  },
+  spacing: {
+    small: '8px',
+    medium: '16px',
+    large: '24px',
+  },
+  typography: {
+    fontFamily: 'Ubuntu Mono, sans-serif',
+    fontSize: {
+      xxsmall: '14px',
+      xsmall: '16px',
+      small: '18px',
+      medium: '24px',
+      large: '36px',
+    },
+  },
+  breakpoints: {
+    mobile: '744px',
+    tablet: '744px',
+  },
+  global: {
+    xpadding: '24px 24px',
+    padding: '32px 72px',
+  }
+};
+
+export const julietTheme: Theme = {
+  colors: {
+    dark: '#292b30',
+    secondaryDark: '#613854',
+    medium: '#ab6c84',
+    light: '#ffc4d1',
+    secondaryLight: '#ffe8e1'
+  },
+  spacing: {
+    small: '8px',
+    medium: '16px',
+    large: '24px',
+  },
+  typography: {
+    fontFamily: 'Ubuntu Mono, sans-serif',
+    fontSize: {
+      xxsmall: '14px',
+      xsmall: '16px',
+      small: '18px',
+      medium: '24px',
+      large: '36px',
+    },
+  },
+  breakpoints: {
+    mobile: '744px',
+    tablet: '744px',
+  },
+  global: {
+    xpadding: '24px 24px',
+    padding: '32px 72px',
+  }
+};
 
 export const themes = {
   orange: orangeTheme,
   blue: blueTheme,
   deepSea: deepSeaTheme,
+  twilight: twilightTheme,
+  juliet: julietTheme,
 } as const;
 
 export type ThemeName = keyof typeof themes;
