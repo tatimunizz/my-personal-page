@@ -2,11 +2,11 @@ import { PageWrapper } from "@components/PageWrapper/PageWrapper";
 import { Window } from "@components/common/Window/Window";
 import { UnderConstruction } from "@components/UnderConstruction/UnderConstruction";
 
-export default function Images() {
+export default function Projects() {
 
   return (
     <PageWrapper>
-      <Window title="images">
+      <Window title="projects">
         <UnderConstruction/>
       </Window>
     </PageWrapper>

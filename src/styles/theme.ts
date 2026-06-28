@@ -98,9 +98,44 @@ export const blueTheme: Theme = {
   }
 };
 
+export const deepSeaTheme: Theme = {
+  colors: {
+    dark: '#0d1b2a',
+    secondaryDark: '#1b263b',
+    medium: '#415a77',
+    light: '#778da9',
+    secondaryLight: '#e0e1dd'
+  },
+  spacing: {
+    small: '8px',
+    medium: '16px',
+    large: '24px',
+  },
+  typography: {
+    fontFamily: 'Ubuntu Mono, sans-serif',
+    fontSize: {
+      xxsmall: '14px',
+      xsmall: '16px',
+      small: '18px',
+      medium: '24px',
+      large: '36px',
+    },
+  },
+  breakpoints: {
+    mobile: '744px',
+    tablet: '744px',
+  },
+  global: {
+    xpadding: '24px 24px',
+    padding: '32px 72px',
+  }
+};
+
+
 export const themes = {
   orange: orangeTheme,
   blue: blueTheme,
+  deepSea: deepSeaTheme,
 } as const;
 
 export type ThemeName = keyof typeof themes;
